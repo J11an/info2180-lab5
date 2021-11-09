@@ -3,14 +3,11 @@ $host = 'localhost';
 $username = 'lab5_user';
 $password = 'password123';
 $dbname = 'world';
+error_reporting(E_ERROR | E_PARSE);
 
 $country = filter_input(INPUT_GET, "country", FILTER_SANITIZE_STRING);
-$urlrequest = $_SERVER['REQUEST_URI'];
-$query = parse_url($urlrequest, PHP_URL_QUERY);
-parse_str($query, $param);
 $contxt = $_GET['context'];
 $context = filter_var($contxt, FILTER_SANITIZE_STRING);
-
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 $s_country = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
